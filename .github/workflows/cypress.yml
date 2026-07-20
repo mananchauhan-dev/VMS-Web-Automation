@@ -1,0 +1,66 @@
+name: Cypress Regression
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "staging"
+        type: choice
+        options: [dev, qa, uat, staging, prod]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cypress run (parallel)
+        uses: cypress-io/github-action@v6
+        with:
+          record: true
+          parallel: true
+          group: "regression"
+        env:
+          ENV: ${{ github.event.inputs.environment || 'staging' }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # One secret per role — set these in repo Settings > Secrets > Actions
+          ADMIN_GOOGLE_EMAIL: ${{ secrets.ADMIN_GOOGLE_EMAIL }}
+          ADMIN_GOOGLE_PASSWORD: ${{ secrets.ADMIN_GOOGLE_PASSWORD }}
+          SUPERADMIN_GOOGLE_EMAIL: ${{ secrets.SUPERADMIN_GOOGLE_EMAIL }}
+          SUPERADMIN_GOOGLE_PASSWORD: ${{ secrets.SUPERADMIN_GOOGLE_PASSWORD }}
+          PROCUREMENT_GOOGLE_EMAIL: ${{ secrets.PROCUREMENT_GOOGLE_EMAIL }}
+          PROCUREMENT_GOOGLE_PASSWORD: ${{ secrets.PROCUREMENT_GOOGLE_PASSWORD }}
+          OPERATIONS_GOOGLE_EMAIL: ${{ secrets.OPERATIONS_GOOGLE_EMAIL }}
+          OPERATIONS_GOOGLE_PASSWORD: ${{ secrets.OPERATIONS_GOOGLE_PASSWORD }}
+          FINANCE_GOOGLE_EMAIL: ${{ secrets.FINANCE_GOOGLE_EMAIL }}
+          FINANCE_GOOGLE_PASSWORD: ${{ secrets.FINANCE_GOOGLE_PASSWORD }}
+          TERRITORY_GOOGLE_EMAIL: ${{ secrets.TERRITORY_GOOGLE_EMAIL }}
+          TERRITORY_GOOGLE_PASSWORD: ${{ secrets.TERRITORY_GOOGLE_PASSWORD }}
+          YARD_GOOGLE_EMAIL: ${{ secrets.YARD_GOOGLE_EMAIL }}
+          YARD_GOOGLE_PASSWORD: ${{ secrets.YARD_GOOGLE_PASSWORD }}
+          SALES_GOOGLE_EMAIL: ${{ secrets.SALES_GOOGLE_EMAIL }}
+          SALES_GOOGLE_PASSWORD: ${{ secrets.SALES_GOOGLE_PASSWORD }}
+          PGADMIN_GOOGLE_EMAIL: ${{ secrets.PGADMIN_GOOGLE_EMAIL }}
+          PGADMIN_GOOGLE_PASSWORD: ${{ secrets.PGADMIN_GOOGLE_PASSWORD }}
+          MANAGER_GOOGLE_EMAIL: ${{ secrets.MANAGER_GOOGLE_EMAIL }}
+          MANAGER_GOOGLE_PASSWORD: ${{ secrets.MANAGER_GOOGLE_PASSWORD }}
+          TENANT_GOOGLE_EMAIL: ${{ secrets.TENANT_GOOGLE_EMAIL }}
+          TENANT_GOOGLE_PASSWORD: ${{ secrets.TENANT_GOOGLE_PASSWORD }}
+
+      - name: Upload mochawesome report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mochawesome-report-${{ matrix.containers }}
+          path: cypress/reports/mochawesome
+          retention-days: 14

@@ -4,12 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:open": "cypress open",
+    "test": "cypress run",
+    "test:local": "cross-env ENV=local cypress run",
+    "test:dev": "cross-env ENV=dev cypress run",
+    "test:qa": "cross-env ENV=qa cypress run",
+    "test:uat": "cross-env ENV=uat cypress run",
+    "test:staging": "cross-env ENV=staging cypress run",
+    "test:prod": "cross-env ENV=prod cypress run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^15.17.0"
+    "cross-env": "^7.0.3",
+    "cypress": "^15.17.0",
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "cypress-terminal-report": "^7.3.3",
+    "dotenv": "^17.4.2"
   }
 }
