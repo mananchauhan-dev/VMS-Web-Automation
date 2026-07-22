@@ -75,13 +75,27 @@ Cypress.Commands.add("loginViaApi", (email = "mananchauhan@tractorjunction.com")
  * duplicate ids, so they can only be targeted by label text, not #id.
  */
 Cypress.Commands.add("selectAutocomplete", (labelText, optionText) => {
-  cy.contains("label", labelText)
-    .parents(".MuiFormControl-root")
-    .first()
-    .find("input")
-    .click()
-    .clear()
-    .type(optionText);
+  const typeIntoField = () => {
+    cy.contains("label", labelText)
+      .parents(".MuiFormControl-root")
+      .first()
+      .find("input")
+      .click()
+      .clear()
+      .type(optionText);
+  };
+
+  typeIntoField();
+
+  // Some option lists (banks, models, states) load async — if typing raced
+  // ahead of that data the listbox renders with no options. Retry once
+  // after giving it a moment, instead of failing outright.
+  cy.get("body").then(($body) => {
+    if ($body.find('ul[role="listbox"] li').length === 0) {
+      cy.wait(1500);
+      typeIntoField();
+    }
+  });
 
   cy.get('ul[role="listbox"] li').contains(optionText).click();
 });
@@ -156,3 +170,4 @@ Cypress.Commands.add("fillDateUnlessPrefilled", (labelText, daysFromToday = 0) =
       cy.get(`.MuiPickersDay-root[aria-label="${targetLabel}"]`).filter(":visible").click();
     });
 });
+

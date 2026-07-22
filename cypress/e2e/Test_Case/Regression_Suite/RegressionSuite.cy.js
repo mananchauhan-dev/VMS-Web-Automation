@@ -19,7 +19,7 @@ describe("Lead generation to RTO confirmation flow", () => {
     cy.get('input[name="regNo"]').clear().type(registrationNumber);
     cy.contains("button", "Verify").should("be.enabled").click();
 
-    cy.wait(3000);
+    cy.wait(6000);
 
     cy.selectAutocompleteUnlessPrefilled("Registration State", "Maharashtra");
     cy.selectAutocompleteUnlessPrefilled("Vehicle Type", "Tractor");
@@ -84,7 +84,7 @@ describe("Lead generation to RTO confirmation flow", () => {
     cy.get('input[name="regNo"]').clear().type(invalidRegistrationNumber);
     cy.contains("button", "Verify").should("be.enabled").click();
 
-    cy.wait(3000);
+    cy.wait(6000);
 
     cy.selectAutocompleteUnlessPrefilled("Registration State", "Maharashtra");
     cy.selectAutocompleteUnlessPrefilled("Vehicle Type", "Tractor");
@@ -111,7 +111,7 @@ describe("Lead generation to RTO confirmation flow", () => {
     cy.get('input[name="regNo"]').clear().type(registrationNumber);
     cy.contains("button", "Verify").should("be.enabled").click();
 
-    cy.wait(3000);
+    cy.wait(6000);
 
     cy.selectAutocompleteUnlessPrefilled("Registration State", "Maharashtra");
     cy.selectAutocompleteUnlessPrefilled("Vehicle Type", "Tractor");
@@ -160,7 +160,7 @@ describe("Lead generation to RTO confirmation flow", () => {
 
     cy.get('input[placeholder="Search By RegNo"]').type(`${registrationNumber}{enter}`);
 
-    cy.wait(2000);
+    cy.wait(4000);
 
 
     cy.get("body").then(($body) => {
