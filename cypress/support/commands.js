@@ -51,10 +51,7 @@ Cypress.Commands.add("loginViaApi", (email = "mananchauhan@tractorjunction.com")
       centre: response.body.data.centre,
     };
 
-    // Step 4: Visit the app and inject auth data BEFORE it loads
-    // onBeforeLoad runs before the app's JavaScript executes,
-    // so when the app checks localStorage for a token, it finds one
-    // and treats the user as already logged in
+  
     cy.visit(Cypress.env("LANDING_PATH") || "/", {
       onBeforeLoad(win) {
         win.localStorage.setItem("token", token);
@@ -64,34 +61,48 @@ Cypress.Commands.add("loginViaApi", (email = "mananchauhan@tractorjunction.com")
   });
 });
 
-// ============================================================
-// Shared MUI form helpers — used by CreateInventory.cy.js and
-// RTOConfirm.cy.js so field-filling logic isn't duplicated per spec.
-// ============================================================
 
-/**
- * selectAutocomplete — types into an MUI Autocomplete by its label text and
- * clicks the matching option. Autocomplete fields in this app share
- * duplicate ids, so they can only be targeted by label text, not #id.
- */
-Cypress.Commands.add("selectAutocomplete", (labelText, optionText) => {
+Cypress.Commands.add("selectRadio", (radioName, value) => {
+  cy.get(`input[name="${radioName}"][value="${value}"]`).click({ force: true });
+});
+
+Cypress.Commands.add("hasMandatoryAsterisk", (labelText) => {
+  cy.contains("label", labelText).invoke("text").should("include", "*");
+});
+
+Cypress.Commands.add("clickAutocomplete", (labelText) => {
   cy.contains("label", labelText)
     .parents(".MuiFormControl-root")
     .first()
     .find("input")
-    .click()
-    .clear()
-    .type(optionText);
+    .click();
+});
+
+Cypress.Commands.add("selectAutocomplete", (labelText, optionText) => {
+  const typeIntoField = () => {
+    cy.contains("label", labelText)
+      .parents(".MuiFormControl-root")
+      .first()
+      .find("input")
+      .click()
+      .clear()
+      .type(optionText);
+  };
+
+  typeIntoField();
+
+
+  cy.get("body").then(($body) => {
+    if ($body.find('ul[role="listbox"] li').length === 0) {
+      cy.wait(1500);
+      typeIntoField();
+    }
+  });
 
   cy.get('ul[role="listbox"] li').contains(optionText).click();
 });
 
-/**
- * selectAutocompleteUnlessPrefilled — some autocompletes get auto-filled
- * and disabled by a Vahan/RTO lookup. If that happened, the value's already
- * correct and the disabled input can't be typed into, so skip it. Otherwise
- * fill it manually like any other autocomplete.
- */
+
 Cypress.Commands.add("selectAutocompleteUnlessPrefilled", (labelText, optionText) => {
   cy.contains("label", labelText)
     .parents(".MuiFormControl-root")
@@ -103,12 +114,6 @@ Cypress.Commands.add("selectAutocompleteUnlessPrefilled", (labelText, optionText
     });
 });
 
-/**
- * fillTextUnlessPrefilled — same idea as selectAutocompleteUnlessPrefilled,
- * but for plain text inputs. Skips fields that are either disabled or
- * already carry a value, so it works whether prefill shows up as a
- * disabled input (CreateInventory) or just a pre-populated value (RTOConfirm).
- */
 Cypress.Commands.add("fillTextUnlessPrefilled", (labelText, value) => {
   cy.contains("label", labelText)
     .parents(".MuiFormControl-root")
@@ -120,12 +125,16 @@ Cypress.Commands.add("fillTextUnlessPrefilled", (labelText, value) => {
     });
 });
 
-/**
- * fillDateUnlessPrefilled — for read-only MUI date pickers (typing does
- * nothing). Opens the picker via its calendar button and picks the date
- * `daysFromToday` days out (0 = today, 1 = tomorrow, ...), unless the field
- * is already disabled/prefilled.
- */
+Cypress.Commands.add("fillTextIfPresentUnlessPrefilled", (labelText, value) => {
+  cy.get("body").then(($body) => {
+    if ($body.find("label").filter((_, el) => el.textContent.includes(labelText)).length === 0) {
+      return;
+    }
+    cy.fillTextUnlessPrefilled(labelText, value);
+  });
+});
+
+
 Cypress.Commands.add("fillDateUnlessPrefilled", (labelText, daysFromToday = 0) => {
   cy.contains("label", labelText)
     .parents(".MuiFormControl-root")
@@ -137,8 +146,6 @@ Cypress.Commands.add("fillDateUnlessPrefilled", (labelText, daysFromToday = 0) =
       cy.wrap($input)
         .parents(".MuiFormControl-root")
         .first()
-        // Matches both the closed ("Choose date") and pre-selected
-        // ("Choose date, selected date is ...") states of the button.
         .find('button[aria-label*="Choose date"]')
         .click();
 
@@ -150,9 +157,110 @@ Cypress.Commands.add("fillDateUnlessPrefilled", (labelText, daysFromToday = 0) =
         year: "numeric",
       });
 
-      // The previous picker's popup can stay mounted (hidden) after closing,
-      // so more than one day cell with this aria-label can exist in the
-      // DOM — only click the one that's actually visible.
+   
       cy.get(`.MuiPickersDay-root[aria-label="${targetLabel}"]`).filter(":visible").click();
     });
+});
+
+Cypress.Commands.add("getAuthToken", () => {
+  return cy.window().then((win) => win.localStorage.getItem("token"));
+});
+
+/**
+ * confirmDealPaymentViaApi — finds the lead by regNo, pulls its latest payment
+ * record, and posts a FinJ APPROVED/SUCCESS callback for it, bypassing the
+ * Finance UI approval step. Yields the update-payment-status-finj response.
+ */
+Cypress.Commands.add("confirmDealPaymentViaApi", (registrationNumber, overrides = {}) => {
+  return cy.getAuthToken().then((token) => {
+    // Header name/scheme unconfirmed against the real API — sending both
+    // common shapes since unused headers are harmless.
+    const headers = {
+      Authorization: token,
+      token,
+    };
+
+    return cy
+      .request({
+        method: "POST",
+        url: `${Cypress.env("API_BASE_URL")}/api/v1/leads?search=${registrationNumber}`,
+        headers,
+        body: {
+          data: {
+            vehicleType: "",
+            minSellingPrice: "",
+            maxSellingPrice: "",
+            minListingPrice: "",
+            maxListingPrice: "",
+            auctionByBankId: "",
+            auctionAgency: "",
+            source: "",
+            vehicleLogisticStatus: "",
+            registrationStates: "",
+            isROCompleted: "",
+            make: "",
+            model: "",
+            manufacturingYears: "",
+            centres: "",
+            listingStatus: "",
+            inventoryStatus: "",
+            typeOfDate: "",
+            dateRangeStart: "",
+            dateRangeEnd: "",
+            minAgeingDays: "",
+          },
+          page: 1,
+          limit: 20,
+        },
+      })
+      .then((searchRes) => {
+        const lead = searchRes.body?.data?.[0];
+        expect(lead, `lead found for regNo ${registrationNumber}`).to.exist;
+
+        return cy
+          .request({
+            method: "GET",
+            url: `${Cypress.env("API_BASE_URL")}/api/v1/leads/${lead._id}`,
+            headers,
+          })
+          .then((detailRes) => {
+            const payments = detailRes.body?.data?.payments || [];
+            const payment = payments[payments.length - 1];
+            expect(payment, `no payment found on lead ${lead._id}`).to.exist;
+
+            const uniqueSuffix = Date.now();
+
+            const body = {
+              payment_id: payment._id,
+              inventory_id: lead._id,
+              finj_transaction_id: uniqueSuffix,
+              payment_for: payment.paymentFor,
+              payee_name: payment.accountHolderName,
+              to_account: payment.accountNo,
+              bank_name: payment.bank?.bankName || null,
+              ifsc_code: payment.ifsc,
+              payment_status: "APPROVED",
+              online_status: "SUCCESS",
+              amount: String(payment.amount),
+              platform: "VMS",
+              online_reference_id: `FINJ-${uniqueSuffix}`,
+              utr: null,
+              mode: "AXIS",
+              from_account: "2323230063914269",
+              transaction_type: "RT",
+              payment_proof: "",
+              payment_date: null,
+              remark: "",
+              ...overrides,
+            };
+
+            return cy.request({
+              method: "POST",
+              url: `${Cypress.env("API_BASE_URL")}/api/v1/payment/update-payment-status-finj`,
+              headers,
+              body,
+            });
+          });
+      });
+  });
 });

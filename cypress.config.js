@@ -6,7 +6,6 @@ const env = process.env.ENV || "dev";
 // Frontend host per ENV. Override any entry via <ENV>_URL in .env
 // (e.g. LOCAL_URL, DEV_URL, QA_URL, UAT_URL, STAGING_URL) — see README "Environments".
 const ENV_URLS = {
-  local: "http://localhost:3000",
   dev: "https://devvmsadmin.tractorfirst.com",
   prod: "https://vmsadmin.tractorjunction.in",
 };
@@ -14,7 +13,6 @@ const ENV_URLS = {
 // Backend API host — separate from the frontend host above (prod: prodvms.* vs vmsadmin.*).
 // Override via API_BASE_URL in .env.
 const API_URLS = {
-  local: "http://localhost:5000",
   dev: "https://devvms.tractorfirst.com",
   prod: "https://prodvms.tractorjunction.in",
 };
