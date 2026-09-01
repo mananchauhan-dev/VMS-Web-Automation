@@ -1,0 +1,1 @@
+{"id":"3e663175f1c03eedaaeb23e48f6e559b","fullName":"vms-web-automation:cypress/e2e/Test_Case/InventoryFlow_TestCases/UploadVehicleImages.cy.js#Upload vehicle images flow Positive: each image slot only accepts jpg/png/jpeg files","name":"Positive: each image slot only accepts jpg/png/jpeg files","status":"passed","testResultsByEnv":{"default":"e9472a1ef69dbd20cffbc817bd7caa8a"}}

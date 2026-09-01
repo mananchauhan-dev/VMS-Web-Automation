@@ -79,7 +79,8 @@ describe("Assign driver for delivery flow", () => {
         cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
         cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
 
-        cy.selectAutocomplete("Centre For Allocation", "Alwar");
+        // Alwar is known to be at full capacity — walk the dropdown for one that isn't.
+        selectCentreWithAvailableCapacity();
         cy.selectAutocomplete("Driver For Pickup", "Hari Prakash Meena");
 
         cy.get("#cta-btn").should("be.enabled").click();
@@ -129,7 +130,118 @@ describe("Assign driver for delivery flow", () => {
       });
     });
   });
-});
+
+  it("Negative: selecting a fully-utilized centre shows the capacity error", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openAssignDriverForm(registrationNumber, () => {
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        // Alwar is a known fully-utilized centre (Remaining Capacity: -2).
+        cy.selectAutocomplete("Centre For Allocation", "Alwar");
+
+        cy.contains("Centre capacity is fully utilized. Please select another centre.").should(
+          "be.visible"
+        );
+      });
+    });
+  });
+
+  it("Negative: Assign Delivery stays disabled while the selected centre has no remaining capacity", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openAssignDriverForm(registrationNumber, () => {
+        cy.fillDateUnlessPrefilled("Pickup Date", 2);
+        cy.selectAutocompleteUnlessPrefilled("Pickup Yard", "Dummy Yard");
+
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        cy.selectAutocomplete("Centre For Allocation", "Alwar");
+        cy.selectAutocomplete("Driver For Pickup", "Hari Prakash Meena");
+
+        cy.contains("Centre capacity is fully utilized. Please select another centre.").should(
+          "be.visible"
+        );
+        cy.get("#cta-btn-disabled").should("exist");
+      });
+    });
+  });
+
+  it("Positive: Remaining Capacity label reflects the selected centre", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openAssignDriverForm(registrationNumber, () => {
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        cy.selectAutocomplete("Centre For Allocation", "Alwar");
+
+        cy.contains(/Remaining Capacity:/).should("be.visible");
+      });
+    });
+  });
+
+
+  it("Negative: clearing a fully-utilized centre selection removes the capacity error", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openAssignDriverForm(registrationNumber, () => {
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        cy.selectAutocomplete("Centre For Allocation", "Alwar");
+        cy.contains("Centre capacity is fully utilized. Please select another centre.").should(
+          "be.visible"
+        );
+
+        cy.contains("label", "Centre For Allocation")
+          .parents(".MuiFormControl-root")
+          .first()
+          .find(".MuiAutocomplete-clearIndicator")
+          .click({ force: true });
+
+        cy.contains("Centre capacity is fully utilized. Please select another centre.").should(
+          "not.exist"
+        );
+      });
+    });
+  });
+ });
+
+// Opens the Centre For Allocation dropdown and picks the first option that
+// doesn't trip the "Centre capacity is fully utilized" error (e.g. Alwar).
+function selectCentreWithAvailableCapacity() {
+  cy.contains("label", "Centre For Allocation")
+    .parents(".MuiFormControl-root")
+    .first()
+    .find("input")
+    .click();
+
+  cy.get('ul[role="listbox"] li').then(($options) => {
+    const optionTexts = [...$options].map((el) => el.textContent.trim());
+    tryNextCentre(optionTexts, 0);
+  });
+}
+
+function tryNextCentre(optionTexts, index) {
+  expect(index, "a centre with available capacity").to.be.lessThan(optionTexts.length);
+
+  cy.get('ul[role="listbox"] li').contains(optionTexts[index]).click();
+
+  cy.get("body").then(($body) => {
+    const isFull = $body
+      .text()
+      .includes("Centre capacity is fully utilized. Please select another centre.");
+
+    if (!isFull) return;
+
+    cy.contains("label", "Centre For Allocation")
+      .parents(".MuiFormControl-root")
+      .first()
+      .find("input")
+      .click();
+
+    tryNextCentre(optionTexts, index + 1);
+  });
+}
 
 function openAssignDriverForm(registrationNumber, thenFn) {
   cy.contains("Task Management").click();

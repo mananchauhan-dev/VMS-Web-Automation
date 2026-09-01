@@ -68,6 +68,70 @@ describe("Raise deal payment flow", () => {
       });
     });
   });
+
+  it("Negative: Request for Payment stays disabled until the mandatory fields are filled", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.contains("button", "Request for Payment").should("be.disabled");
+      });
+    });
+  });
+
+  it("Negative: Auction Agency Name, Bank Spoc Mobile, and Bank Spoc name are mandatory", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.hasMandatoryAsterisk("Auction Agency Name");
+        cy.hasMandatoryAsterisk("Bank Spoc Mobile");
+        cy.hasMandatoryAsterisk("Bank Spoc name");
+      });
+    });
+  });
+
+  it("Negative: Registration Date and Reposession Date are mandatory", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.hasMandatoryAsterisk("Registration Date");
+        cy.hasMandatoryAsterisk("Reposession Date");
+      });
+    });
+  });
+
+  it("Negative: Enter Loan Account Number is mandatory", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.hasMandatoryAsterisk("Enter Loan Account Number");
+      });
+    });
+  });
+
+  it("Negative: Payment Details fields (Deal Amount, Bank Name, Account holder Name, Account Number, IFSC code) are mandatory", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        cy.hasMandatoryAsterisk("Enter Deal Amount");
+        cy.hasMandatoryAsterisk("Select Bank Name");
+        cy.hasMandatoryAsterisk("Enter Account holder Name");
+        cy.hasMandatoryAsterisk("Enter Account Number");
+        cy.hasMandatoryAsterisk("Enter IFSC code");
+      });
+    });
+  });
+
+  it("Negative: Select Pickup Yard is mandatory", () => {
+    cy.readFile("cypress/tmp/lastCreatedLead.json").then(({ registrationNumber }) => {
+      openRaiseDealPaymentForm(registrationNumber, () => {
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+        cy.get(".MuiAccordionSummary-expandIconWrapper").not(".Mui-expanded").first().click();
+
+        cy.hasMandatoryAsterisk("Select Pickup Yard");
+      });
+    });
+  });
 });
 
 
@@ -81,10 +145,14 @@ function openRaiseDealPaymentForm(registrationNumber, thenFn) {
   cy.wait(2000);
 
   cy.get("body").then(($body) => {
-    const foundInTable = $body.find(`td[title="${registrationNumber}"]`).length > 0;
+    // Status is the 2nd column — only open the row if it's already at "Rto Verification Completed".
+    const $matchedRow = $body.find(`td[title="${registrationNumber}"]`).parent("tr");
+    const isRtoCompleted =
+      $matchedRow.length > 0 &&
+      $matchedRow.find("td").eq(1).text().trim() === "Rto Verification Completed";
 
-    if (foundInTable) {
-      cy.contains("td", registrationNumber).parent("tr").click();
+    if (isRtoCompleted) {
+      cy.wrap($matchedRow).click();
       cy.contains("button", "Raise Payment Request").click();
       thenFn();
       return;
@@ -99,16 +167,20 @@ function openRaiseDealPaymentForm(registrationNumber, thenFn) {
     cy.wait(2000);
 
     cy.get("body").then(($body2) => {
-      const hasResults = $body2.find("table tbody tr").length > 0;
+      // Status is the 2nd column — only rows already at "Rto Verification Completed" are ready for a payment request.
+      const $rtoCompletedRows = $body2.find("table tbody tr").filter((_, row) => {
+        const statusCell = row.querySelectorAll("td")[1];
+        return statusCell && statusCell.textContent.trim() === "Rto Verification Completed";
+      });
 
-      if (!hasResults) {
+      if ($rtoCompletedRows.length === 0) {
         cy.log(
-          "No task found via regNo search or the raise-deal-payment task lookup — skipping payment request."
+          "No task found via regNo search or the raise-deal-payment task lookup with Status 'Rto Verification Completed' — skipping payment request."
         );
         return;
       }
 
-      cy.get("table tbody tr").first().click();
+      cy.wrap($rtoCompletedRows.first()).click();
 
       cy.wait(2000);
 

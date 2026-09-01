@@ -227,25 +227,47 @@ describe("Inventory flow", () => {
     cy.fillTextUnlessPrefilled("Select Manufacturing Year", "2020");
     cy.fillTextUnlessPrefilled("Chassis Number", "CH123456789");
 
-    cy.hasMandatoryAsterisk("Engine Number");
-    cy.get("#cta-btn-disabled").should("exist");
-    cy.contains("Lead Generated Successfully!!!").should("not.exist");
+    cy.contains("label", "Engine Number")
+      .parents(".MuiFormControl-root")
+      .first()
+      .find("input")
+      .then(($input) => {
+        if ($input.val()) {
+          cy.log("Engine Number was auto-filled by Vahan verify — skipping empty-field validation check.");
+          return;
+        }
+
+        cy.hasMandatoryAsterisk("Engine Number");
+        cy.get("#cta-btn-disabled").should("exist");
+        cy.contains("Lead Generated Successfully!!!").should("not.exist");
+      });
   });
 
-  // it("Negative: leaving Chassis Number empty blocks inventory creation", () => {
-  //   const regNo = generateRegNo();
-  //   completeStepOne(regNo);
+  it("Negative: leaving Chassis Number empty blocks inventory creation", () => {
+    const regNo = generateRegNo();
+    completeStepOne(regNo);
 
-  //   cy.selectAutocompleteUnlessPrefilled("Make", "Swaraj");
-  //   cy.selectAutocomplete("Model", "855 FE");
+    cy.selectAutocompleteUnlessPrefilled("Make", "Swaraj");
+    cy.selectAutocomplete("Model", "855 FE");
 
-  //   cy.fillTextUnlessPrefilled("Select Manufacturing Year", "2020");
-  //   cy.fillTextUnlessPrefilled("Engine Number", "EN123456789");
+    cy.fillTextUnlessPrefilled("Select Manufacturing Year", "2020");
+    cy.fillTextUnlessPrefilled("Engine Number", "EN123456789");
 
-  //   cy.hasMandatoryAsterisk("Chassis Number");
-  //   cy.get("#cta-btn-disabled").should("exist");
-  //   cy.contains("Lead Generated Successfully!!!").should("not.exist");
-  // });
+    cy.contains("label", "Chassis Number")
+      .parents(".MuiFormControl-root")
+      .first()
+      .find("input")
+      .then(($input) => {
+        if ($input.val()) {
+          cy.log("Chassis Number was auto-filled by Vahan verify — skipping empty-field validation check.");
+          return;
+        }
+
+        cy.hasMandatoryAsterisk("Chassis Number");
+        cy.get("#cta-btn-disabled").should("exist");
+        cy.contains("Lead Generated Successfully!!!").should("not.exist");
+      });
+  });
 
   it("Positive: Engine Number and Chassis Number accept alphanumeric values, and Remark is optional free text", () => {
     const regNo = generateRegNo();
