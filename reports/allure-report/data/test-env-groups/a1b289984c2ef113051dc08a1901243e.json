@@ -1,1 +1,0 @@
-{"id":"a1b289984c2ef113051dc08a1901243e","fullName":"vms-web-automation:cypress/e2e/Test_Case/InventoryFlow_TestCases/CreateInventory.cy.js#Inventory flow Negative: leaving Engine Number empty blocks inventory creation","name":"Negative: leaving Engine Number empty blocks inventory creation","status":"passed","testResultsByEnv":{"default":"d0ed8fd01b679a1a8904ba6d28cabe0f"}}

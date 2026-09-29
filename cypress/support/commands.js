@@ -79,27 +79,57 @@ Cypress.Commands.add("clickAutocomplete", (labelText) => {
 });
 
 Cypress.Commands.add("selectAutocomplete", (labelText, optionText) => {
-  const typeIntoField = () => {
-    cy.contains("label", labelText)
+  const getInput = () =>
+    cy
+      .contains("label", labelText)
       .parents(".MuiFormControl-root")
       .first()
-      .find("input")
+      .find("input");
+
+  const typeIntoField = () => {
+    getInput()
       .click()
+      // MUI's Autocomplete popper is still mounting/positioning right after
+      // click; firing .clear() immediately can race its onChange handler and
+      // throw an uncaught "Cannot read properties of null (reading 'value')"
+      // in the app's own JS — reproduced in headless (cypress run) but not
+      // interactive (cypress open), where human click pacing hides the race.
+      .wait(200)
       .clear()
       .type(optionText);
   };
 
   typeIntoField();
 
-
-  cy.get("body").then(($body) => {
-    if ($body.find('ul[role="listbox"] li').length === 0) {
+  // Scope the listbox lookup to THIS field's own popper via aria-controls
+  // (MUI sets it on the input, matching the listbox's id). Confirmed live:
+  // the app hardcodes the SAME static id (e.g.
+  // "size-small-standard-multi-listbox") on every Autocomplete instance
+  // instead of generating a unique one per field — so `cy.get('#id')` (which
+  // takes jQuery/Sizzle's getElementById fast path for a bare id selector)
+  // always resolves to the FIRST such id anywhere in the DOM, i.e. whichever
+  // field opened earliest (e.g. an Accessories accordion field), not the one
+  // actually open now. `[id="..."]` forces the attribute-selector engine
+  // instead, returning every element sharing that id so we can filter down
+  // to the one that's actually visible/open.
+  //
+  // MUI only sets aria-controls while the listbox is rendered — popup open
+  // AND at least one matching option. Reading it immediately after typing
+  // (options still loading, or popup closed by a re-render) returned
+  // undefined → `[id="undefined"]`. If it's missing, retype once, then let
+  // .should() retry until the listbox appears.
+  getInput().then(($input) => {
+    if (!$input.attr("aria-controls")) {
       cy.wait(1500);
       typeIntoField();
     }
   });
 
-  cy.get('ul[role="listbox"] li').contains(optionText).click();
+  getInput()
+    .should("have.attr", "aria-controls")
+    .then((listboxId) => {
+      cy.get(`[id="${listboxId}"]`).filter(":visible").find("li").contains(optionText).click();
+    });
 });
 
 
@@ -109,7 +139,16 @@ Cypress.Commands.add("selectAutocompleteUnlessPrefilled", (labelText, optionText
     .first()
     .find("input")
     .then(($input) => {
-      if ($input.prop("disabled")) return;
+      // Bug: this was only skipping when disabled, not when already
+      // prefilled with a value (unlike fillTextUnlessPrefilled, which checks
+      // both) — so a field the app defaults to a real value (e.g. "Select
+      // payment mode" -> "Bank Transfer") still got click().clear().type()'d
+      // unconditionally. Clearing an already-filled MUI Autocomplete can
+      // race the app's own onChange handler and throw an uncaught
+      // "Cannot read properties of null (reading 'value')" — reproduced
+      // live on exactly this field. Skipping when a value is already
+      // present avoids touching it at all.
+      if ($input.prop("disabled") || $input.val()) return;
       cy.selectAutocomplete(labelText, optionText);
     });
 });

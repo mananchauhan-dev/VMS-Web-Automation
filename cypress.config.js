@@ -1,6 +1,10 @@
 const { defineConfig } = require("cypress");
 require("dotenv").config();
 
+const fs = require("fs");
+const { sendReportEmail } = require("./cypress/plugins/sendReportEmail");
+const { publishAllureReport, RESULTS_DIR } = require("./cypress/plugins/publishAllureReport");
+
 const env = process.env.ENV || "dev";
 
 // Frontend host per ENV. Override any entry via <ENV>_URL in .env
@@ -60,8 +64,50 @@ module.exports = defineConfig({
       openMode: 0,
     },
     setupNodeEvents(on, config) {
-      require("cypress-mochawesome-reporter/plugin")(on);
+      // Cypress only keeps ONE handler per event name — registering
+      // "after:run" separately from cypress-mochawesome-reporter/plugin's
+      // own "after:run" handler silently overwrote it (or vice versa),
+      // so the report-email send never actually fired. Call both hooks
+      // from a single combined handler instead of registering the event
+      // twice.
+      const { beforeRunHook, afterRunHook } = require("cypress-mochawesome-reporter/lib");
       require("cypress-terminal-report/src/installLogsPrinter")(on);
+
+      // Allure results (raw JSON) → `npm run report:allure` builds the HTML
+      // report from them. allureCypress registers its own "after:run", which
+      // the combined handler below replaces — so forward into it there.
+      // Headless runs start from empty results, so the report/email covers
+      // THIS run only, not leftovers from earlier runs. (setupNodeEvents runs
+      // once per `cypress run`, before allureCypress creates the dir.)
+      if (config.isTextTerminal) {
+        fs.rmSync(RESULTS_DIR, { recursive: true, force: true });
+      }
+
+      const { allureCypress } = require("allure-cypress/reporter");
+      const allureReporter = allureCypress(on, config, {
+        resultsDir: "allure-results",
+        environmentInfo: {
+          ENV: env,
+          Frontend: envUrl,
+          API: apiUrl,
+          Viewport: process.env.VIEWPORT || "desktop",
+          Node: process.version,
+        },
+      });
+
+      on("before:run", async (details) => {
+        await beforeRunHook(details);
+      });
+
+      // Fires only for headless `cypress run` (not `cypress open`), once
+      // the whole run finishes — pass or fail.
+      on("after:run", async (results) => {
+        allureReporter.onAfterRun(results);
+        await afterRunHook(results);
+        // Build Allure report → deploy to Netlify → link goes in the email.
+        const reportUrl = await publishAllureReport();
+        await sendReportEmail(results, { env, reportUrl });
+      });
 
       config.env.ENV = env;
       config.env.API_BASE_URL = apiUrl;

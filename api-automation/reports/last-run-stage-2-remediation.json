@@ -1,0 +1,306 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/workflows/insurer-crud.spec.ts",
+      "tests/workflows/bank-crud.spec.ts",
+      "tests/workflows/accessories-checklist-crud.spec.ts",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflows/accessories-checklist-crud.spec.ts",
+      "file": "workflows/accessories-checklist-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow AccessoriesCheckList CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/accessories-checklist-crud.spec.ts",
+          "line": 41,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "KNOWN API DEFECT: update-checklist confirmed to no-op — cannot clean up after itself. See Stage 2 findings.",
+                      "location": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                        "line": 51,
+                        "column": 8
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": -1,
+                      "parallelIndex": -1,
+                      "status": "skipped",
+                      "duration": 0,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T05:58:05.046Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "KNOWN API DEFECT: update-checklist confirmed to no-op — cannot clean up after itself. See Stage 2 findings.",
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                            "line": 51,
+                            "column": 8
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-a0770995965826ddc171",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 56,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/bank-crud.spec.ts",
+      "file": "workflows/bank-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow Bank CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/bank-crud.spec.ts",
+          "line": 34,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1233,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/bank",
+                          "duration": 450
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/bank?search=<name> finds the created record",
+                          "duration": 152
+                        },
+                        {
+                          "title": "3. UPDATE — PUT /api/v1/bank changes the bankName",
+                          "duration": 147
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET /api/v1/bank (activeStatus=All) reflects the new name",
+                          "duration": 150
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PUT /api/v1/bank sets activeStatus=false (cleanup)",
+                          "duration": 168
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — GET /api/v1/bank (default, active-only) no longer lists it",
+                          "duration": 156
+                        }
+                      ],
+                      "startTime": "2026-09-11T05:58:05.406Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1989255f24246d57d771-34f9b927e1b4f2f32282",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 37,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/insurer-crud.spec.ts",
+      "file": "workflows/insurer-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow Insurer CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/insurer-crud.spec.ts",
+          "line": 31,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2486,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/insurer",
+                          "duration": 1282
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/insurer?search=<name> finds the created record",
+                          "duration": 209
+                        },
+                        {
+                          "title": "3. UPDATE — PATCH /api/v1/insurer changes the name",
+                          "duration": 145
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET /api/v1/insurer reflects the new name",
+                          "duration": 143
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PATCH /api/v1/insurer sets activeStatus=false (cleanup)",
+                          "duration": 559
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — GET /api/v1/insurer?activeStatus=ACTIVE no longer lists it",
+                          "duration": 145
+                        }
+                      ],
+                      "startTime": "2026-09-11T05:58:06.689Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-981bc07a75884f2a7a1a",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 37,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T05:58:04.781Z",
+    "duration": 4434.950999999999,
+    "expected": 2,
+    "skipped": 1,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

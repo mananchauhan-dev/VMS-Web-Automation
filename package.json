@@ -11,12 +11,19 @@
     "test:qa": "cross-env ENV=qa cypress run",
     "test:uat": "cross-env ENV=uat cypress run",
     "test:staging": "cross-env ENV=staging cypress run",
-    "test:prod": "cross-env ENV=prod cypress run"
+    "test:prod": "cross-env ENV=prod cypress run",
+    "test:regression": "cross-env ENV=dev cypress run --spec \"cypress/e2e/Test_Case/Regression_Suite/**/*.cy.js\"",
+    "report:clean": "rm -rf allure-results allure-report",
+    "report:allure": "allure generate ./allure-results",
+    "report:open": "allure open ./allure-report/allure2",
+    "report:deploy": "node -r dotenv/config -e \"require('./cypress/plugins/publishAllureReport').publishAllureReport().then((u) => u && console.log(u))\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "allure": "^3.19.0",
+    "allure-cypress": "^3.13.0",
     "cross-env": "^7.0.3",
     "cypress": "^15.17.0",
     "cypress-mochawesome-reporter": "^3.8.4",

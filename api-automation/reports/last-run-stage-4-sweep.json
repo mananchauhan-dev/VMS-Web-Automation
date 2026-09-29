@@ -1,0 +1,627 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/workflows/mutation-field-coverage.spec.ts",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflows/mutation-field-coverage.spec.ts",
+      "file": "workflows/mutation-field-coverage.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow @parameters Mutation field coverage (owned-record boundary/enum/negative sweep)",
+          "file": "workflows/mutation-field-coverage.spec.ts",
+          "line": 106,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Yard — PUT /api/v1/yard/edit field sweep",
+              "ok": false,
+              "tags": [
+                "workflow",
+                "parameters"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1747,
+                      "error": {
+                        "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:136:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:135:7",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                          "column": 70,
+                          "line": 97
+                        },
+                        "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                            "column": 70,
+                            "line": 97
+                          },
+                          "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:136:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:135:7"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/yard/add",
+                          "duration": 777
+                        },
+                        {
+                          "title": "2. FIELD SWEEP — PUT /api/v1/yard/edit",
+                          "duration": 647,
+                          "error": {
+                            "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:136:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:135:7",
+                            "location": {
+                              "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                              "column": 70,
+                              "line": 97
+                            },
+                            "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                          },
+                          "steps": [
+                            {
+                              "title": "sweep — body \"yardDetails.yardId\" [WRONG_TYPE] number instead of string",
+                              "duration": 179
+                            },
+                            {
+                              "title": "sweep — body \"yardDetails.yardId\" [WRONG_TYPE] array instead of string",
+                              "duration": 153
+                            },
+                            {
+                              "title": "sweep — body \"yardDetails.yardId\" [EMPTY] empty string",
+                              "duration": 154
+                            },
+                            {
+                              "title": "sweep — body \"yardDetails.yardId\" [NULL] null value",
+                              "duration": 160,
+                              "error": {
+                                "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                                "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:136:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:135:7",
+                                "location": {
+                                  "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                                  "column": 70,
+                                  "line": 97
+                                },
+                                "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3. SOFT-DELETE — PUT /api/v1/yard/edit sets active=depricated (cleanup)",
+                          "duration": 152
+                        },
+                        {
+                          "title": "4. VERIFY CLEANUP",
+                          "duration": 160
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:24:04.474Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/workflows-mutation-field-c-1ed8d-pi-v1-yard-edit-field-sweep/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                        "column": 70,
+                        "line": 97
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "daa067e89a096893ea95-4327c7a72324222bd81d",
+              "file": "workflows/mutation-field-coverage.spec.ts",
+              "line": 109,
+              "column": 3
+            },
+            {
+              "title": "Insurer — PATCH /api/v1/insurer field sweep",
+              "ok": false,
+              "tags": [
+                "workflow",
+                "parameters"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 6508,
+                      "error": {
+                        "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:177:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:176:7",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                          "column": 70,
+                          "line": 97
+                        },
+                        "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                            "column": 70,
+                            "line": 97
+                          },
+                          "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:177:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:176:7"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/insurer",
+                          "duration": 1661
+                        },
+                        {
+                          "title": "2. FIELD SWEEP — PATCH /api/v1/insurer",
+                          "duration": 4034,
+                          "error": {
+                            "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:177:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:176:7",
+                            "location": {
+                              "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                              "column": 70,
+                              "line": 97
+                            },
+                            "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                          },
+                          "steps": [
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] number instead of string",
+                              "duration": 1912
+                            },
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] array instead of string",
+                              "duration": 458
+                            },
+                            {
+                              "title": "sweep — body \"id\" [EMPTY] empty string",
+                              "duration": 1154
+                            },
+                            {
+                              "title": "sweep — body \"id\" [NULL] null value",
+                              "duration": 507,
+                              "error": {
+                                "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                                "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:97:70\n    at sweepFields (/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:84:7)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:177:9\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts:176:7",
+                                "location": {
+                                  "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                                  "column": 70,
+                                  "line": 97
+                                },
+                                "snippet": "   95 |         if (respSpec?.schema) {\n   96 |           const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n>  97 |           expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n      |                                                                      ^\n   98 |         }\n   99 |       });\n  100 |       casesRun += 1;"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3. SOFT-DELETE — PATCH /api/v1/insurer sets activeStatus=false (cleanup)",
+                          "duration": 435
+                        },
+                        {
+                          "title": "4. VERIFY CLEANUP",
+                          "duration": 370
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:24:06.752Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/workflows-mutation-field-c-ad8e5--api-v1-insurer-field-sweep/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/mutation-field-coverage.spec.ts",
+                        "column": 70,
+                        "line": 97
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "daa067e89a096893ea95-49a0e2772714c416866d",
+              "file": "workflows/mutation-field-coverage.spec.ts",
+              "line": 160,
+              "column": 3
+            },
+            {
+              "title": "Bank — PUT /api/v1/bank field sweep",
+              "ok": true,
+              "tags": [
+                "workflow",
+                "parameters"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1806,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/bank",
+                          "duration": 857
+                        },
+                        {
+                          "title": "2. FIELD SWEEP — PUT /api/v1/bank",
+                          "duration": 633,
+                          "steps": [
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] number instead of string",
+                              "duration": 181
+                            },
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] array instead of string",
+                              "duration": 147
+                            },
+                            {
+                              "title": "sweep — body \"id\" [EMPTY] empty string",
+                              "duration": 149
+                            },
+                            {
+                              "title": "sweep — body \"id\" [NULL] null value",
+                              "duration": 155
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3. SOFT-DELETE — PUT /api/v1/bank sets activeStatus=false (cleanup)",
+                          "duration": 149
+                        },
+                        {
+                          "title": "4. VERIFY CLEANUP",
+                          "duration": 150
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:24:13.799Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "daa067e89a096893ea95-cc112822be710b4984fc",
+              "file": "workflows/mutation-field-coverage.spec.ts",
+              "line": 199,
+              "column": 3
+            },
+            {
+              "title": "States — PATCH /api/v1/states/add-states field sweep",
+              "ok": true,
+              "tags": [
+                "workflow",
+                "parameters"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2716,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/states/add-states",
+                          "duration": 409
+                        },
+                        {
+                          "title": "2. FIELD SWEEP — PATCH /api/v1/states/add-states",
+                          "duration": 1895,
+                          "steps": [
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] number instead of string",
+                              "duration": 152
+                            },
+                            {
+                              "title": "sweep — body \"id\" [WRONG_TYPE] array instead of string",
+                              "duration": 144
+                            },
+                            {
+                              "title": "sweep — body \"id\" [EMPTY] empty string",
+                              "duration": 186
+                            },
+                            {
+                              "title": "sweep — body \"id\" [NULL] null value",
+                              "duration": 153
+                            },
+                            {
+                              "title": "sweep — body \"data.active\" [WRONG_TYPE] string instead of boolean",
+                              "duration": 162
+                            },
+                            {
+                              "title": "sweep — body \"data.active\" [WRONG_TYPE] number instead of boolean",
+                              "duration": 143
+                            },
+                            {
+                              "title": "sweep — body \"data.active\" [EMPTY] empty string",
+                              "duration": 157
+                            },
+                            {
+                              "title": "sweep — body \"data.active\" [NULL] null value",
+                              "duration": 144
+                            },
+                            {
+                              "title": "sweep — body \"data.gstNumber\" [WRONG_TYPE] number instead of string",
+                              "duration": 147
+                            },
+                            {
+                              "title": "sweep — body \"data.gstNumber\" [WRONG_TYPE] array instead of string",
+                              "duration": 196
+                            },
+                            {
+                              "title": "sweep — body \"data.gstNumber\" [EMPTY] empty string",
+                              "duration": 148
+                            },
+                            {
+                              "title": "sweep — body \"data.gstNumber\" [NULL] null value",
+                              "duration": 162
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3. SOFT-DELETE — PATCH /api/v1/states/add-states sets active=false (cleanup)",
+                          "duration": 148
+                        },
+                        {
+                          "title": "4. VERIFY CLEANUP",
+                          "duration": 255
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:24:15.634Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "daa067e89a096893ea95-eb6af56fb440b880412e",
+              "file": "workflows/mutation-field-coverage.spec.ts",
+              "line": 237,
+              "column": 3
+            },
+            {
+              "title": "MasterData — PUT /api/v1/dashboard/master-data field sweep",
+              "ok": true,
+              "tags": [
+                "workflow",
+                "parameters"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3783,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — PUT /api/v1/dashboard/master-data",
+                          "duration": 1187
+                        },
+                        {
+                          "title": "2. FIELD SWEEP — PUT /api/v1/dashboard/master-data",
+                          "duration": 2248,
+                          "steps": [
+                            {
+                              "title": "sweep — body \"key\" [WRONG_TYPE] number instead of string",
+                              "duration": 151
+                            },
+                            {
+                              "title": "sweep — body \"key\" [WRONG_TYPE] array instead of string",
+                              "duration": 152
+                            },
+                            {
+                              "title": "sweep — body \"key\" [EMPTY] empty string",
+                              "duration": 144
+                            },
+                            {
+                              "title": "sweep — body \"key\" [NULL] null value",
+                              "duration": 147
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [VALID_ENUM] enum value \"number\"",
+                              "duration": 144
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [VALID_ENUM] enum value \"boolean\"",
+                              "duration": 156
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [VALID_ENUM] enum value \"object\"",
+                              "duration": 147
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [VALID_ENUM] enum value \"array\"",
+                              "duration": 140
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [VALID_ENUM] enum value \"string\"",
+                              "duration": 149
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [INVALID_ENUM] invalid enum value",
+                              "duration": 149
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [WRONG_TYPE] number instead of string",
+                              "duration": 155
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [WRONG_TYPE] array instead of string",
+                              "duration": 146
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [EMPTY] empty string",
+                              "duration": 192
+                            },
+                            {
+                              "title": "sweep — body \"valueType\" [NULL] null value",
+                              "duration": 272
+                            }
+                          ]
+                        },
+                        {
+                          "title": "3. SOFT-DELETE — PUT sets isActive=false, valueType restored (cleanup)",
+                          "duration": 161
+                        },
+                        {
+                          "title": "4. VERIFY CLEANUP",
+                          "duration": 182
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:24:18.359Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "daa067e89a096893ea95-f1b559c04b9f1cfcffe5",
+              "file": "workflows/mutation-field-coverage.spec.ts",
+              "line": 283,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T07:24:03.809Z",
+    "duration": 18361.735999999997,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

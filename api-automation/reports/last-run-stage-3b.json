@@ -1,0 +1,549 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/workflows/master-data-crud.spec.ts",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflows/master-data-crud.spec.ts",
+      "file": "workflows/master-data-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow MasterData CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/master-data-crud.spec.ts",
+          "line": 34,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3505,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — PUT /api/v1/dashboard/master-data",
+                          "duration": 1965
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/dashboard/master-data?search=<key> finds it",
+                          "duration": 520
+                        },
+                        {
+                          "title": "3. UPDATE — PUT /api/v1/dashboard/master-data changes the value",
+                          "duration": 166
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET reflects the new value",
+                          "duration": 235
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PUT sets isActive=false (cleanup)",
+                          "duration": 428
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — the record's own isActive field now reads false",
+                          "duration": 183
+                        }
+                      ],
+                      "startTime": "2026-09-11T06:42:58.611Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1a56dce04e66908bdb25-a36ab7f7cd5079d953e4",
+              "file": "workflows/master-data-crud.spec.ts",
+              "line": 40,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "regression/generated-mutating-endpoints.spec.ts",
+      "file": "regression/generated-mutating-endpoints.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@regression @contract Generated mutating-endpoint suite (POST/PUT/PATCH/DELETE)",
+          "file": "regression/generated-mutating-endpoints.spec.ts",
+          "line": 25,
+          "column": 6,
+          "specs": [
+            {
+              "title": "POST /api/v1/broker/broker-dashboard — documented status + response contract (minimal valid payload)",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2118,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:14.547Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "214aef6d4ad8c51c6ae9-a005847cc7ed37efd641",
+              "file": "regression/generated-mutating-endpoints.spec.ts",
+              "line": 29,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "parameters/generated-body-field-values.spec.ts",
+      "file": "parameters/generated-body-field-values.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@negative @contract Generated: request-body field value coverage (incl. nested/array)",
+          "file": "parameters/generated-body-field-values.spec.ts",
+          "line": 37,
+          "column": 6,
+          "specs": [
+            {
+              "title": "PUT /api/v1/bank — body \"id\" [WRONG_TYPE] number instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 817,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:28.571Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-46d2cc0fc9634e5e3126",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PUT /api/v1/bank — body \"id\" [WRONG_TYPE] array instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 799,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:29.423Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-797598a04c2be1df99fe",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PUT /api/v1/bank — body \"id\" [EMPTY] empty string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 442,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:30.240Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-0077024f9f37bdd1f5a3",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PUT /api/v1/bank — body \"id\" [NULL] null value",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 754,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:30.694Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-5758171fb5c82d1e29df",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/insurer — body \"id\" [WRONG_TYPE] number instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1762,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:31.464Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-b893abd7794c5a314abc",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/insurer — body \"id\" [WRONG_TYPE] array instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2196,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:33.243Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-3a2b0cb9558878d2551c",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/insurer — body \"id\" [EMPTY] empty string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 577,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:35.452Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-20737604b655d7390673",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/insurer — body \"id\" [NULL] null value",
+              "ok": false,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 583,
+                      "error": {
+                        "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                          "column": 72,
+                          "line": 75
+                        },
+                        "snippet": "  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                            "column": 72,
+                            "line": 75
+                          },
+                          "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:43:36.040Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/parameters-generated-body--1311c-r-—-body-id-NULL-null-value/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                        "column": 72,
+                        "line": 75
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-24976892e88730ae476a",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T06:42:58.050Z",
+    "duration": 15905.992,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

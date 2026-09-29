@@ -1,0 +1,159 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/regression/generated-mutating-endpoints.spec.ts",
+      "--grep",
+      "POST /api/v1/leadstatusflow/flow-for-my-teams",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "regression/generated-mutating-endpoints.spec.ts",
+      "file": "regression/generated-mutating-endpoints.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@regression @contract Generated mutating-endpoint suite (POST/PUT/PATCH/DELETE)",
+          "file": "regression/generated-mutating-endpoints.spec.ts",
+          "line": 26,
+          "column": 6,
+          "specs": [
+            {
+              "title": "POST /api/v1/leadstatusflow/flow-for-my-teams — documented status + response contract (minimal valid payload)",
+              "ok": false,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 695,
+                      "error": {
+                        "message": "Error: POST /api/v1/leadstatusflow/flow-for-my-teams response failed contract validation:\n/data/0/assignTaskTo must be string ({\"type\":\"string\"})\n/data/1/assignTaskTo must be string ({\"type\":\"string\"})\n/data/2/assignTaskTo must be string ({\"type\":\"string\"})\n/data/3/assignTaskTo must be string ({\"type\":\"string\"})\n/data/4/assignTaskTo must be string ({\"type\":\"string\"})\n/data/5/assignTaskTo must be string ({\"type\":\"string\"})\n/data/6/assignTaskTo must be string ({\"type\":\"string\"})\n/data/7/assignTaskTo must be string ({\"type\":\"string\"})\n/data/8/assignTaskTo must be string ({\"type\":\"string\"})\n/data/9/assignTaskTo must be string ({\"type\":\"string\"})\n/data/10/assignTaskTo must be string ({\"type\":\"string\"})\n/data/11/assignTaskTo must be string ({\"type\":\"string\"})\n/data/12/assignTaskTo must be string ({\"type\":\"string\"})\n/data/13/assignTaskTo must be string ({\"type\":\"string\"})\n/data/14/assignTaskTo must be string ({\"type\":\"string\"})\n/data/15/assignTaskTo must be string ({\"type\":\"string\"})\n/data/16/assignTaskTo must be string ({\"type\":\"string\"})\n/data/17/assignTaskTo must be string ({\"type\":\"string\"})\n/data/18/assignTaskTo must be string ({\"type\":\"string\"})\n/data/19/assignTaskTo must be string ({\"type\":\"string\"})\n/data/20/assignTaskTo must be string ({\"type\":\"string\"})\n/data/21/assignTaskTo must be string ({\"type\":\"string\"})\n/data/22/assignTaskTo must be string ({\"type\":\"string\"})\n/data/23/assignTaskTo must be string ({\"type\":\"string\"})\n/data/24/assignTaskTo must be string ({\"type\":\"string\"})\n/data/25/assignTaskTo must be string ({\"type\":\"string\"})\n/data/26/assignTaskTo must be string ({\"type\":\"string\"})\n/data/27/assignTaskTo must be string ({\"type\":\"string\"})\n/data/28/assignTaskTo must be string ({\"type\":\"string\"})\n/data/29/assignTaskTo must be string ({\"type\":\"string\"})\n/data/30/assignTaskTo must be string ({\"type\":\"string\"})\n/data/31/assignTaskTo must be string ({\"type\":\"string\"})\n/data/32/assignTaskTo must be string ({\"type\":\"string\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: POST /api/v1/leadstatusflow/flow-for-my-teams response failed contract validation:\n/data/0/assignTaskTo must be string ({\"type\":\"string\"})\n/data/1/assignTaskTo must be string ({\"type\":\"string\"})\n/data/2/assignTaskTo must be string ({\"type\":\"string\"})\n/data/3/assignTaskTo must be string ({\"type\":\"string\"})\n/data/4/assignTaskTo must be string ({\"type\":\"string\"})\n/data/5/assignTaskTo must be string ({\"type\":\"string\"})\n/data/6/assignTaskTo must be string ({\"type\":\"string\"})\n/data/7/assignTaskTo must be string ({\"type\":\"string\"})\n/data/8/assignTaskTo must be string ({\"type\":\"string\"})\n/data/9/assignTaskTo must be string ({\"type\":\"string\"})\n/data/10/assignTaskTo must be string ({\"type\":\"string\"})\n/data/11/assignTaskTo must be string ({\"type\":\"string\"})\n/data/12/assignTaskTo must be string ({\"type\":\"string\"})\n/data/13/assignTaskTo must be string ({\"type\":\"string\"})\n/data/14/assignTaskTo must be string ({\"type\":\"string\"})\n/data/15/assignTaskTo must be string ({\"type\":\"string\"})\n/data/16/assignTaskTo must be string ({\"type\":\"string\"})\n/data/17/assignTaskTo must be string ({\"type\":\"string\"})\n/data/18/assignTaskTo must be string ({\"type\":\"string\"})\n/data/19/assignTaskTo must be string ({\"type\":\"string\"})\n/data/20/assignTaskTo must be string ({\"type\":\"string\"})\n/data/21/assignTaskTo must be string ({\"type\":\"string\"})\n/data/22/assignTaskTo must be string ({\"type\":\"string\"})\n/data/23/assignTaskTo must be string ({\"type\":\"string\"})\n/data/24/assignTaskTo must be string ({\"type\":\"string\"})\n/data/25/assignTaskTo must be string ({\"type\":\"string\"})\n/data/26/assignTaskTo must be string ({\"type\":\"string\"})\n/data/27/assignTaskTo must be string ({\"type\":\"string\"})\n/data/28/assignTaskTo must be string ({\"type\":\"string\"})\n/data/29/assignTaskTo must be string ({\"type\":\"string\"})\n/data/30/assignTaskTo must be string ({\"type\":\"string\"})\n/data/31/assignTaskTo must be string ({\"type\":\"string\"})\n/data/32/assignTaskTo must be string ({\"type\":\"string\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                          "column": 94,
+                          "line": 70
+                        },
+                        "snippet": "  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                            "column": 94,
+                            "line": 70
+                          },
+                          "message": "Error: POST /api/v1/leadstatusflow/flow-for-my-teams response failed contract validation:\n/data/0/assignTaskTo must be string ({\"type\":\"string\"})\n/data/1/assignTaskTo must be string ({\"type\":\"string\"})\n/data/2/assignTaskTo must be string ({\"type\":\"string\"})\n/data/3/assignTaskTo must be string ({\"type\":\"string\"})\n/data/4/assignTaskTo must be string ({\"type\":\"string\"})\n/data/5/assignTaskTo must be string ({\"type\":\"string\"})\n/data/6/assignTaskTo must be string ({\"type\":\"string\"})\n/data/7/assignTaskTo must be string ({\"type\":\"string\"})\n/data/8/assignTaskTo must be string ({\"type\":\"string\"})\n/data/9/assignTaskTo must be string ({\"type\":\"string\"})\n/data/10/assignTaskTo must be string ({\"type\":\"string\"})\n/data/11/assignTaskTo must be string ({\"type\":\"string\"})\n/data/12/assignTaskTo must be string ({\"type\":\"string\"})\n/data/13/assignTaskTo must be string ({\"type\":\"string\"})\n/data/14/assignTaskTo must be string ({\"type\":\"string\"})\n/data/15/assignTaskTo must be string ({\"type\":\"string\"})\n/data/16/assignTaskTo must be string ({\"type\":\"string\"})\n/data/17/assignTaskTo must be string ({\"type\":\"string\"})\n/data/18/assignTaskTo must be string ({\"type\":\"string\"})\n/data/19/assignTaskTo must be string ({\"type\":\"string\"})\n/data/20/assignTaskTo must be string ({\"type\":\"string\"})\n/data/21/assignTaskTo must be string ({\"type\":\"string\"})\n/data/22/assignTaskTo must be string ({\"type\":\"string\"})\n/data/23/assignTaskTo must be string ({\"type\":\"string\"})\n/data/24/assignTaskTo must be string ({\"type\":\"string\"})\n/data/25/assignTaskTo must be string ({\"type\":\"string\"})\n/data/26/assignTaskTo must be string ({\"type\":\"string\"})\n/data/27/assignTaskTo must be string ({\"type\":\"string\"})\n/data/28/assignTaskTo must be string ({\"type\":\"string\"})\n/data/29/assignTaskTo must be string ({\"type\":\"string\"})\n/data/30/assignTaskTo must be string ({\"type\":\"string\"})\n/data/31/assignTaskTo must be string ({\"type\":\"string\"})\n/data/32/assignTaskTo must be string ({\"type\":\"string\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:31.030Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/regression-generated-mutat-4904e-ract-minimal-valid-payload-/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                        "column": 94,
+                        "line": 70
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "214aef6d4ad8c51c6ae9-47fb98d0d52f491df644",
+              "file": "regression/generated-mutating-endpoints.spec.ts",
+              "line": 30,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T07:25:30.286Z",
+    "duration": 1490.406,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

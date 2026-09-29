@@ -1,0 +1,914 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/workflows/insurer-crud.spec.ts",
+      "tests/workflows/bank-crud.spec.ts",
+      "tests/workflows/accessories-checklist-crud.spec.ts",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflows/accessories-checklist-crud.spec.ts",
+      "file": "workflows/accessories-checklist-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow AccessoriesCheckList CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/accessories-checklist-crud.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. CREATE — POST /api/v1/accessories-checklist/create-checklist",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3515,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:03:54.721Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-184d7d644c5706397708",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 39,
+              "column": 3
+            },
+            {
+              "title": "2. READ — POST /api/v1/accessories-checklist/get-accessory-checklist?accessoryName=<name> finds it",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1905,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:03:58.273Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-f9011b023ad251606c10",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 49,
+              "column": 3
+            },
+            {
+              "title": "3. UPDATE — PATCH /api/v1/accessories-checklist/update-checklist changes the name",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1606,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:00.187Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-fa798fea8727a502810f",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 62,
+              "column": 3
+            },
+            {
+              "title": "4. VERIFY UPDATE — read back reflects the new name",
+              "ok": false,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1528,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QA-AUTOMATION-CHECKLIST-1789045434715-UPDATED\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QA-AUTOMATION-CHECKLIST-1789045434715-UPDATED\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts:77:34",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                          "column": 34,
+                          "line": 77
+                        },
+                        "snippet": "  75 |     });\n  76 |     const match = (json.data as any[]).find((c) => c._id === createdId);\n> 77 |     expect(match?.accessoryName).toBe(`${uniqueName}-UPDATED`);\n     |                                  ^\n  78 |   });\n  79 |\n  80 |   test(\"5. SOFT-DELETE — PATCH .../update-checklist sets activeStatus=INACTIVE (cleanup)\", async ({ request }) => {"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                            "column": 34,
+                            "line": 77
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"QA-AUTOMATION-CHECKLIST-1789045434715-UPDATED\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n\n  75 |     });\n  76 |     const match = (json.data as any[]).find((c) => c._id === createdId);\n> 77 |     expect(match?.accessoryName).toBe(`${uniqueName}-UPDATED`);\n     |                                  ^\n  78 |   });\n  79 |\n  80 |   test(\"5. SOFT-DELETE — PATCH .../update-checklist sets activeStatus=INACTIVE (cleanup)\", async ({ request }) => {\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts:77:34"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:01.802Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/workflows-accessories-chec-eae2a--back-reflects-the-new-name/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                        "column": 34,
+                        "line": 77
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-07f1c7c0d5b6f834250a",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 71,
+              "column": 3
+            },
+            {
+              "title": "5. SOFT-DELETE — PATCH .../update-checklist sets activeStatus=INACTIVE (cleanup)",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Create step did not run/succeed",
+                      "location": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                        "line": 81,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 6,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:03.761Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Create step did not run/succeed",
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                            "line": 81,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-da534ac1ed9810443a98",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 80,
+              "column": 3
+            },
+            {
+              "title": "6. VERIFY CLEANUP — the record's own activeStatus field now reads false",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Create step did not run/succeed",
+                      "location": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                        "line": 89,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 3,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:03.803Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Create step did not run/succeed",
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/accessories-checklist-crud.spec.ts",
+                            "line": 89,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "4569f765e5c94a251a7b-84085dc0fcd802f42fbd",
+              "file": "workflows/accessories-checklist-crud.spec.ts",
+              "line": 88,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/bank-crud.spec.ts",
+      "file": "workflows/bank-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow Bank CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/bank-crud.spec.ts",
+          "line": 25,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. CREATE — POST /api/v1/bank",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 575,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:03.842Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1989255f24246d57d771-7ac8783f18c4215fe73e",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 31,
+              "column": 3
+            },
+            {
+              "title": "2. READ — GET /api/v1/bank?search=<name> finds the created record",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 736,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:04.426Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1989255f24246d57d771-7cf2a9dfe6423975e8af",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 42,
+              "column": 3
+            },
+            {
+              "title": "3. UPDATE — PUT /api/v1/bank changes the bankName",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1137,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:05.171Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "1989255f24246d57d771-3e0beaad19361af4842e",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 52,
+              "column": 3
+            },
+            {
+              "title": "4. VERIFY UPDATE — GET /api/v1/bank?search=<all, so it's found regardless of active filter> reflects the new name",
+              "ok": false,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 19414,
+                      "error": {
+                        "message": "Error: apiRequestContext.fetch: read ECONNRESET\nCall log:\n\u001b[2m  - → GET https://devvms.tractorfirst.com/api/v1/bank?search=QA-AUTOMATION-BANK-1789045443840-UPDATED&activeStatus=All\u001b[22m\n\u001b[2m    - user-agent: Playwright/1.63.0 (x64; ubuntu 24.04) node/20.20\u001b[22m\n\u001b[2m    - accept: application/json\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n",
+                        "stack": "Error: apiRequestContext.fetch: read ECONNRESET\nCall log:\n\u001b[2m  - → GET https://devvms.tractorfirst.com/api/v1/bank?search=QA-AUTOMATION-BANK-1789045443840-UPDATED&activeStatus=All\u001b[22m\n\u001b[2m    - user-agent: Playwright/1.63.0 (x64; ubuntu 24.04) node/20.20\u001b[22m\n\u001b[2m    - accept: application/json\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n    at callEndpoint (/home/tj/VMS-Web-Automation/api-automation/src/core/apiClient.js:85:34)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts:65:22",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/src/core/apiClient.js",
+                          "column": 34,
+                          "line": 85
+                        },
+                        "snippet": "   at ../src/core/apiClient.js:85\n\n  83 |   }\n  84 |\n> 85 |   const response = await request.fetch(url, fetchOptions);\n     |                                  ^\n  86 |   let json;\n  87 |   try {\n  88 |     json = await response.json();"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/src/core/apiClient.js",
+                            "column": 34,
+                            "line": 85
+                          },
+                          "message": "Error: apiRequestContext.fetch: read ECONNRESET\nCall log:\n\u001b[2m  - → GET https://devvms.tractorfirst.com/api/v1/bank?search=QA-AUTOMATION-BANK-1789045443840-UPDATED&activeStatus=All\u001b[22m\n\u001b[2m    - user-agent: Playwright/1.63.0 (x64; ubuntu 24.04) node/20.20\u001b[22m\n\u001b[2m    - accept: application/json\u001b[22m\n\u001b[2m    - accept-encoding: gzip,deflate,br\u001b[22m\n\n\n   at ../src/core/apiClient.js:85\n\n  83 |   }\n  84 |\n> 85 |   const response = await request.fetch(url, fetchOptions);\n     |                                  ^\n  86 |   let json;\n  87 |   try {\n  88 |     json = await response.json();\n    at callEndpoint (/home/tj/VMS-Web-Automation/api-automation/src/core/apiClient.js:85:34)\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts:65:22"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:06.316Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/workflows-bank-crud--workf-939e9-ilter-reflects-the-new-name/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/src/core/apiClient.js",
+                        "column": 34,
+                        "line": 85
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "1989255f24246d57d771-e987030afd791ec92909",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 61,
+              "column": 3
+            },
+            {
+              "title": "5. SOFT-DELETE — PUT /api/v1/bank sets activeStatus=false (cleanup)",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Create step did not run/succeed",
+                      "location": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts",
+                        "line": 73,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 10,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:29.188Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Create step did not run/succeed",
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts",
+                            "line": 73,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1989255f24246d57d771-f066d6ea72cd926b0a31",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 72,
+              "column": 3
+            },
+            {
+              "title": "6. VERIFY CLEANUP — GET /api/v1/bank (default, active-only) no longer lists it",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [
+                    {
+                      "type": "skip",
+                      "description": "Create step did not run/succeed",
+                      "location": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts",
+                        "line": 81,
+                        "column": 10
+                      }
+                    }
+                  ],
+                  "expectedStatus": "skipped",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "skipped",
+                      "duration": 6,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:29.223Z",
+                      "annotations": [
+                        {
+                          "type": "skip",
+                          "description": "Create step did not run/succeed",
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/bank-crud.spec.ts",
+                            "line": 81,
+                            "column": 10
+                          }
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "1989255f24246d57d771-568d190114c159bf4c6a",
+              "file": "workflows/bank-crud.spec.ts",
+              "line": 80,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/insurer-crud.spec.ts",
+      "file": "workflows/insurer-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow Insurer CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/insurer-crud.spec.ts",
+          "line": 26,
+          "column": 6,
+          "specs": [
+            {
+              "title": "1. CREATE — POST /api/v1/insurer",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1774,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:29.278Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-69d496aed43731b46499",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "2. READ — GET /api/v1/insurer?search=<name> finds the created record",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1172,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:31.079Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-e06f3d2d0d10789dfa0e",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "3. UPDATE — PATCH /api/v1/insurer changes the name",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 434,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:32.261Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-d8cefef61bb42713c78d",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 56,
+              "column": 3
+            },
+            {
+              "title": "4. VERIFY UPDATE — GET /api/v1/insurer reflects the new name",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1660,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:32.704Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-1e78b638a4e27ebad4e6",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 65,
+              "column": 3
+            },
+            {
+              "title": "5. SOFT-DELETE — PATCH /api/v1/insurer sets activeStatus=false (cleanup)",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 659,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:34.373Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-2782c258c1327b9d8f28",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 74,
+              "column": 3
+            },
+            {
+              "title": "6. VERIFY CLEANUP — GET /api/v1/insurer?activeStatus=ACTIVE no longer lists it",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 727,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-10T13:04:35.091Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "7ccec8a0445c02a77c74-1e4599c43ab40235402c",
+              "file": "workflows/insurer-crud.spec.ts",
+              "line": 82,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-10T13:03:54.088Z",
+    "duration": 38720.354,
+    "expected": 12,
+    "skipped": 4,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

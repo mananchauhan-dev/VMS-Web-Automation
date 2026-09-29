@@ -1,1 +1,0 @@
-{"id":"52ee06a02a163f7790552941f1713f38","fullName":"vms-web-automation:cypress/e2e/Test_Case/InventoryFlow_TestCases/CreateInventory.cy.js#Inventory flow Negative: an already-registered vehicle blocks lead creation","name":"Negative: an already-registered vehicle blocks lead creation","status":"passed","testResultsByEnv":{"default":"95eee1064a72494ff9c42d8c2491f2ec"}}

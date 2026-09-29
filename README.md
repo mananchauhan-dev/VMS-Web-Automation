@@ -122,9 +122,12 @@ npm run test:prod
 
 ## Reporting
 
-- `cypress-mochawesome-reporter` — HTML/JSON report per run in
-  `cypress/reports/mochawesome` (gitignored), includes screenshots on
-  failure and embedded videos.
+- `allure-cypress` — writes results to `allure-results/` (gitignored). After
+  every headless run, `cypress/plugins/publishAllureReport.js` builds the
+  Allure HTML report (`allure-report/`), deploys it to Netlify
+  (https://vms-automation.netlify.app) and the report email links to that
+  run's deploy. Needs `NETLIFY_AUTH_TOKEN` + `NETLIFY_SITE_ID` in `.env`.
+  `npm run report:open` views it locally, `npm run report:deploy` re-deploys.
 - `cypress-terminal-report` — console + network logs printed inline in CI
   output for failed tests.
 
@@ -155,3 +158,11 @@ DevOps — inject as env vars, not files.
   runs.
 - Retries scoped to CI network flakiness only, not used to paper over
   assertion failures.
+
+
+## To run regression suit
+
+npm run test:regression:report	Clears old results, runs the regression suite, builds the report
+npm run report:allure        	  Builds allure-report/ from allure-results/
+npm run report:open	            Opens the report locally
+npm run report:deploy	          Deploys allure-report/ to Netlify as the live site

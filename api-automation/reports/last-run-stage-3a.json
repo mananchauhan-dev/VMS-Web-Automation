@@ -1,0 +1,675 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/workflows/states-crud.spec.ts",
+      "--workers=1",
+      "--grep-invert",
+      "NOMATCH",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "workflows/states-crud.spec.ts",
+      "file": "workflows/states-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow States CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/states-crud.spec.ts",
+          "line": 33,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1423,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/states/add-states",
+                          "duration": 596
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/states/active-state finds the created record",
+                          "duration": 161
+                        },
+                        {
+                          "title": "3. UPDATE — PATCH /api/v1/states/add-states changes gstNumber",
+                          "duration": 160
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET /api/v1/states/active-state reflects the new gstNumber",
+                          "duration": 179
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PATCH /api/v1/states/add-states sets active=false (cleanup)",
+                          "duration": 160
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — the record's own active field now reads false",
+                          "duration": 157
+                        }
+                      ],
+                      "startTime": "2026-09-11T06:15:05.194Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b9056bfe4f3423c6fb0c-eb958b2fbb94da78053f",
+              "file": "workflows/states-crud.spec.ts",
+              "line": 36,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "parameters/generated-body-field-values.spec.ts",
+      "file": "parameters/generated-body-field-values.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@negative @contract Generated: request-body field value coverage (incl. nested/array)",
+          "file": "parameters/generated-body-field-values.spec.ts",
+          "line": 37,
+          "column": 6,
+          "specs": [
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"id\" [WRONG_TYPE] number instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 762,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:23.166Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-ae43c9f5c088298eb93e",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"id\" [WRONG_TYPE] array instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 585,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:23.970Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-909de5b24136f5f16d99",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"id\" [EMPTY] empty string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 452,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:24.571Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-493e0d04264e231df34a",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"id\" [NULL] null value",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 427,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:25.037Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-122a02f9131d38b3a845",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.active\" [WRONG_TYPE] string instead of boolean",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 523,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:25.479Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-21c8490cd9680a427064",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.active\" [WRONG_TYPE] number instead of boolean",
+              "ok": false,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 689,
+                      "error": {
+                        "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                          "column": 72,
+                          "line": 75
+                        },
+                        "snippet": "  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                            "column": 72,
+                            "line": 75
+                          },
+                          "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:26.012Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/parameters-generated-body--9ed8f-E-number-instead-of-boolean/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                        "column": 72,
+                        "line": 75
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-10f98ad02f0e7e2c6343",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.active\" [EMPTY] empty string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 615,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:27.257Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-78b820ed440bbb230ea5",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.active\" [NULL] null value",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 554,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:27.917Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-77c5620c92b98211f493",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.gstNumber\" [WRONG_TYPE] number instead of string",
+              "ok": false,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 515,
+                      "error": {
+                        "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                          "column": 72,
+                          "line": 75
+                        },
+                        "snippet": "  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                            "column": 72,
+                            "line": 75
+                          },
+                          "message": "Error: Contract violation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  73 |           if (respSpec?.schema) {\n  74 |             const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 75 |             expect(valid, `Contract violation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                        ^\n  76 |           }\n  77 |         });\n  78 |       }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts:75:72"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:28.492Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/parameters-generated-body--2634b-PE-number-instead-of-string/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/parameters/generated-body-field-values.spec.ts",
+                        "column": 72,
+                        "line": 75
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-d18fbc3431d15a066ded",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.gstNumber\" [WRONG_TYPE] array instead of string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 810,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:29.536Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-a15299259739e993277b",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.gstNumber\" [EMPTY] empty string",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 542,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:30.379Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-ac70bee484512cdec778",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            },
+            {
+              "title": "PATCH /api/v1/states/add-states — body \"data.gstNumber\" [NULL] null value",
+              "ok": true,
+              "tags": [
+                "negative",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 391,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T06:15:30.942Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b2d876c3d1f6d9d1eadc-567a827e5980516202a0",
+              "file": "parameters/generated-body-field-values.spec.ts",
+              "line": 48,
+              "column": 9
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T06:15:04.659Z",
+    "duration": 11008.552000000001,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}
