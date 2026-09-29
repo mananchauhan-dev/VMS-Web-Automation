@@ -1,0 +1,314 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/regression/generated-get-endpoints.spec.ts",
+      "--grep",
+      "GET /api/v1/leadstatusflow|GET /api/v1/leadstatusflow/flow-by-status|GET /api/v1/leadstatusflow/add-update-statusflow|GET /api/v1/searchLocation|GET /api/v1/tehsils/\\{id\\}|GET /api/v1/role-wise-dashboard —",
+      "--workers=1",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "regression/generated-get-endpoints.spec.ts",
+      "file": "regression/generated-get-endpoints.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@regression @contract Generated GET endpoint suite",
+          "file": "regression/generated-get-endpoints.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "GET /api/v1/tehsils/{id} — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 831,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:08.566Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-65d4bf99cf38f7192c5a",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            },
+            {
+              "title": "GET /api/v1/searchLocation — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1103,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:09.432Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-7bcd542ac5243776cb44",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            },
+            {
+              "title": "GET /api/v1/leadstatusflow — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4430,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:10.548Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-2ce8c7efb874e80edc73",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            },
+            {
+              "title": "GET /api/v1/leadstatusflow/flow-by-status — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1454,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:14.990Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-e33868f62c25aa0df678",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            },
+            {
+              "title": "GET /api/v1/leadstatusflow/add-update-statusflow — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1258,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:16.464Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-b580e2c7abe87b7ded71",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            },
+            {
+              "title": "GET /api/v1/role-wise-dashboard — documented status + response contract",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3760,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:25:17.749Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "602d931e8012189c28ba-d03393f487961a0b9b8a",
+              "file": "regression/generated-get-endpoints.spec.ts",
+              "line": 32,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T07:25:07.749Z",
+    "duration": 13810.891,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

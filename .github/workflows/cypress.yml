@@ -57,10 +57,10 @@ jobs:
           TENANT_GOOGLE_EMAIL: ${{ secrets.TENANT_GOOGLE_EMAIL }}
           TENANT_GOOGLE_PASSWORD: ${{ secrets.TENANT_GOOGLE_PASSWORD }}
 
-      - name: Upload mochawesome report
+      - name: Upload Allure results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: mochawesome-report-${{ matrix.containers }}
-          path: cypress/reports/mochawesome
+          name: allure-results-${{ matrix.containers }}
+          path: allure-results
           retention-days: 14

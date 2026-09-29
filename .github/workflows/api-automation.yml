@@ -1,0 +1,93 @@
+name: API Automation (OpenAPI-driven)
+
+on:
+  push:
+    branches: [main]
+    paths: ["api-automation/**"]
+  pull_request:
+    paths: ["api-automation/**"]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment"
+        required: true
+        default: "dev"
+        type: choice
+        options: [dev, prod]
+      run_mutating:
+        description: "Also run POST/PUT/PATCH/DELETE suites (writes real data)"
+        required: true
+        default: "false"
+        type: choice
+        options: ["true", "false"]
+
+defaults:
+  run:
+    working-directory: api-automation
+
+jobs:
+  install-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: api-automation/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+
+  smoke:
+    needs: install-and-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm, cache-dependency-path: api-automation/package-lock.json }
+      - run: npm ci
+      - run: npm run inventory
+      - name: Smoke (no credentials required)
+        run: npm run test:smoke
+        env:
+          API_ENV: ${{ github.event.inputs.environment || 'dev' }}
+
+  regression-and-contract:
+    needs: smoke
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm, cache-dependency-path: api-automation/package-lock.json }
+      - run: npm ci
+      - name: Regression + negative + RBAC + business-rule suites
+        run: npm run test:safe
+        env:
+          API_ENV: ${{ github.event.inputs.environment || 'dev' }}
+          ADMIN_EMAIL: ${{ secrets.API_ADMIN_EMAIL }}
+          VMT_TEST_MOBILE: ${{ secrets.API_VMT_TEST_MOBILE }}
+          PARTNER_API_KEY: ${{ secrets.API_PARTNER_API_KEY }}
+      - name: Mutating suites (opt-in, writes data)
+        if: github.event.inputs.run_mutating == 'true'
+        run: npx playwright test tests/regression/generated-mutating-endpoints.spec.ts tests/negative/generated-missing-required-body-field.spec.ts tests/parameters/generated-body-field-values.spec.ts tests/workflows
+        env:
+          API_ENV: ${{ github.event.inputs.environment || 'dev' }}
+          ADMIN_EMAIL: ${{ secrets.API_ADMIN_EMAIL }}
+          VMT_TEST_MOBILE: ${{ secrets.API_VMT_TEST_MOBILE }}
+          RUN_MUTATING: "true"
+      - name: Coverage report
+        if: always()
+        run: npx playwright test --reporter=json > reports/last-run.json || true; npm run coverage
+        env:
+          API_ENV: ${{ github.event.inputs.environment || 'dev' }}
+          ADMIN_EMAIL: ${{ secrets.API_ADMIN_EMAIL }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: api-automation-reports
+          path: |
+            api-automation/reports/html-report
+            api-automation/reports/allure-results
+            api-automation/reports/coverage-report.md
+            api-automation/reports/coverage-matrix.md
+          retention-days: 14

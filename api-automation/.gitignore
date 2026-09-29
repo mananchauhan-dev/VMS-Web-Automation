@@ -1,0 +1,9 @@
+node_modules/
+.env
+test-results/
+reports/html-report/
+reports/allure-results/
+reports/allure-report/
+reports/last-run.json
+playwright-report/
+*.log

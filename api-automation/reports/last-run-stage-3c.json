@@ -1,0 +1,520 @@
+{
+  "config": {
+    "argv": [
+      "/usr/bin/node",
+      "/home/tj/VMS-Web-Automation/api-automation/node_modules/.bin/playwright",
+      "test",
+      "tests/regression/generated-mutating-endpoints.spec.ts",
+      "--workers=1",
+      "--grep",
+      "PATCH /api/v1/insurer |PUT /api/v1/bank |PATCH /api/v1/states/add-states ",
+      "--reporter=json"
+    ],
+    "configFile": "/home/tj/VMS-Web-Automation/api-automation/playwright.config.ts",
+    "rootDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/home/tj/VMS-Web-Automation/api-automation/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/tj/VMS-Web-Automation/api-automation/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "regression/generated-mutating-endpoints.spec.ts",
+      "file": "regression/generated-mutating-endpoints.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@regression @contract Generated mutating-endpoint suite (POST/PUT/PATCH/DELETE)",
+          "file": "regression/generated-mutating-endpoints.spec.ts",
+          "line": 26,
+          "column": 6,
+          "specs": [
+            {
+              "title": "PATCH /api/v1/states/add-states — documented status + response contract (minimal valid payload)",
+              "ok": false,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 1036,
+                      "error": {
+                        "message": "Error: PATCH /api/v1/states/add-states response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: PATCH /api/v1/states/add-states response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                          "column": 94,
+                          "line": 70
+                        },
+                        "snippet": "  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                            "column": 94,
+                            "line": 70
+                          },
+                          "message": "Error: PATCH /api/v1/states/add-states response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:00:42.019Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/regression-generated-mutat-4230a-ract-minimal-valid-payload-/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                        "column": 94,
+                        "line": 70
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "214aef6d4ad8c51c6ae9-2aa91f6b3da9eb18ceeb",
+              "file": "regression/generated-mutating-endpoints.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "PUT /api/v1/bank — documented status + response contract (minimal valid payload)",
+              "ok": true,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1019,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:00:43.589Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "214aef6d4ad8c51c6ae9-d4cccfae2167545aca17",
+              "file": "regression/generated-mutating-endpoints.spec.ts",
+              "line": 30,
+              "column": 5
+            },
+            {
+              "title": "PATCH /api/v1/insurer — documented status + response contract (minimal valid payload)",
+              "ok": false,
+              "tags": [
+                "regression",
+                "contract"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 3808,
+                      "error": {
+                        "message": "Error: PATCH /api/v1/insurer response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                        "stack": "Error: PATCH /api/v1/insurer response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                          "column": 94,
+                          "line": 70
+                        },
+                        "snippet": "  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                            "column": 94,
+                            "line": 70
+                          },
+                          "message": "Error: PATCH /api/v1/insurer response failed contract validation:\n/data must be object ({\"type\":\"object\"})\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  68 |       if (respSpec?.schema) {\n  69 |         const { valid, errors } = validateAgainstSchema(respSpec.schema, json);\n> 70 |         expect(valid, `${ep.id} response failed contract validation:\\n${errors.join(\"\\n\")}`).toBe(true);\n     |                                                                                              ^\n  71 |       }\n  72 |     });\n  73 |   }\n    at /home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts:70:94"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-11T07:00:44.636Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/regression-generated-mutat-f1feb-ract-minimal-valid-payload-/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/regression/generated-mutating-endpoints.spec.ts",
+                        "column": 94,
+                        "line": 70
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "214aef6d4ad8c51c6ae9-5e80b18684a921636fc3",
+              "file": "regression/generated-mutating-endpoints.spec.ts",
+              "line": 30,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/states-crud.spec.ts",
+      "file": "workflows/states-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow States CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/states-crud.spec.ts",
+          "line": 33,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": false,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 666,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:50:24\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:42:7",
+                        "location": {
+                          "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts",
+                          "column": 24,
+                          "line": 50
+                        },
+                        "snippet": "  48 |           },\n  49 |         });\n> 50 |         expect(status).toBe(200);\n     |                        ^\n  51 |         expect(json.success).toBe(true);\n  52 |         expect(json.data?._id).toBeTruthy();\n  53 |         createdId = json.data._id;"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts",
+                            "column": 24,
+                            "line": 50
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n\n  48 |           },\n  49 |         });\n> 50 |         expect(status).toBe(200);\n     |                        ^\n  51 |         expect(json.success).toBe(true);\n  52 |         expect(json.data?._id).toBeTruthy();\n  53 |         createdId = json.data._id;\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:50:24\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:42:7"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/states/add-states",
+                          "duration": 658,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m400\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m400\u001b[39m\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:50:24\n    at /home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts:42:7",
+                            "location": {
+                              "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts",
+                              "column": 24,
+                              "line": 50
+                            },
+                            "snippet": "  48 |           },\n  49 |         });\n> 50 |         expect(status).toBe(200);\n     |                        ^\n  51 |         expect(json.success).toBe(true);\n  52 |         expect(json.data?._id).toBeTruthy();\n  53 |         createdId = json.data._id;"
+                          }
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:01:14.231Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/home/tj/VMS-Web-Automation/api-automation/test-results/workflows-states-crud--wor-3ee74--soft-delete-full-lifecycle/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/home/tj/VMS-Web-Automation/api-automation/tests/workflows/states-crud.spec.ts",
+                        "column": 24,
+                        "line": 50
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b9056bfe4f3423c6fb0c-eb958b2fbb94da78053f",
+              "file": "workflows/states-crud.spec.ts",
+              "line": 36,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/yard-crud.spec.ts",
+      "file": "workflows/yard-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow Yard CRUD (create -> get -> update -> verify -> soft-delete)",
+          "file": "workflows/yard-crud.spec.ts",
+          "line": 47,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1790,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/yard/add",
+                          "duration": 617
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/yard?search=<name> finds the created record",
+                          "duration": 179
+                        },
+                        {
+                          "title": "3. UPDATE — PUT /api/v1/yard/edit changes the address",
+                          "duration": 171
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET /api/v1/yard reflects the new address",
+                          "duration": 168
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PUT /api/v1/yard/edit sets active=depricated (cleanup)",
+                          "duration": 194
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — GET /api/v1/yard (default, active-only) no longer lists it",
+                          "duration": 452
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:01:15.307Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "9fe9add5857ab8f3dbf5-8762a0862043d8cf4e04",
+              "file": "workflows/yard-crud.spec.ts",
+              "line": 50,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "workflows/states-crud.spec.ts",
+      "file": "workflows/states-crud.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "@workflow States CRUD (create -> read -> update -> verify -> soft-delete)",
+          "file": "workflows/states-crud.spec.ts",
+          "line": 30,
+          "column": 6,
+          "specs": [
+            {
+              "title": "full lifecycle",
+              "ok": true,
+              "tags": [
+                "workflow"
+              ],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 2254,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "1. CREATE — POST /api/v1/states/add-states",
+                          "duration": 968
+                        },
+                        {
+                          "title": "2. READ — GET /api/v1/states/active-state finds the created record",
+                          "duration": 172
+                        },
+                        {
+                          "title": "3. UPDATE — PATCH /api/v1/states/add-states changes gstNumber",
+                          "duration": 492
+                        },
+                        {
+                          "title": "4. VERIFY UPDATE — GET /api/v1/states/active-state reflects the new gstNumber",
+                          "duration": 222
+                        },
+                        {
+                          "title": "5. SOFT-DELETE — PATCH /api/v1/states/add-states sets active=false (cleanup)",
+                          "duration": 202
+                        },
+                        {
+                          "title": "6. VERIFY CLEANUP — the record's own active field now reads false",
+                          "duration": 184
+                        }
+                      ],
+                      "startTime": "2026-09-11T07:02:38.785Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "b9056bfe4f3423c6fb0c-eb958b2fbb94da78053f",
+              "file": "workflows/states-crud.spec.ts",
+              "line": 33,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T07:00:41.186Z",
+    "duration": 13650.472999999998,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "vms-api-automation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OpenAPI-driven API automation framework for the VMS backend (spec: spec/vms-openapi.json).",
+  "type": "module",
+  "scripts": {
+    "inventory": "node scripts/generate-inventory.js",
+    "coverage": "node scripts/generate-coverage-report.js",
+    "pretest": "npm run inventory",
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:negative": "playwright test --grep @negative",
+    "test:contract": "playwright test --grep @contract",
+    "test:rbac": "playwright test --grep @rbac",
+    "test:business": "playwright test --grep @business",
+    "test:workflow": "playwright test --grep @workflow",
+    "test:parameters": "playwright test tests/parameters/generated-path-param-values.spec.ts tests/parameters/generated-query-param-values.spec.ts",
+    "test:safe": "playwright test tests/smoke tests/regression/generated-get-endpoints.spec.ts tests/negative tests/rbac tests/business-rules tests/parameters/generated-path-param-values.spec.ts tests/parameters/generated-query-param-values.spec.ts",
+    "test:json": "playwright test --reporter=json > reports/last-run.json",
+    "report": "allure generate reports/allure-results --clean -o reports/allure-report && allure open reports/allure-report",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "@faker-js/faker": "^9.0.0",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "allure-playwright": "^3.0.0",
+    "allure-commandline": "^2.30.0",
+    "dotenv": "^16.4.5",
+    "typescript": "^5.5.4",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.3",
+    "@types/node": "^20.14.15"
+  }
+}

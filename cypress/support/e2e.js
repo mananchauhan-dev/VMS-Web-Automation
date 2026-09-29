@@ -17,4 +17,5 @@
 import './commands'
 
 import 'cypress-mochawesome-reporter/register'
+import 'allure-cypress'
 require('cypress-terminal-report/src/installLogsCollector')()

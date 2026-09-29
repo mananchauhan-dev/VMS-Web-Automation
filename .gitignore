@@ -38,3 +38,8 @@ yarn-error.log*
 /cypress/screenshots
 /cypress/downloads
 /cypress/tmp
+# allure
+/allure-results
+/allure-report
+/allure-history
+.netlify
