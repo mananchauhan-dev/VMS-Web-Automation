@@ -6,21 +6,48 @@
 // Recipients and the API key live in .env (gitignored) — CRS_API_KEY,
 // CRS_REPORT_RECIPIENTS (comma-separated). Neither is committed.
 //
+// Recipients per git branch: CRS_REPORT_RECIPIENTS_<BRANCH> (e.g.
+// CRS_REPORT_RECIPIENTS_MAIN, CRS_REPORT_RECIPIENTS_STAGE) wins when set for
+// the branch being run; otherwise CRS_REPORT_RECIPIENTS is used.
+//
 // reportUrl is the Netlify-hosted Allure report (publishAllureReport.js);
 // the main site URL when the build/deploy was skipped or failed. Failure
 // screenshots are attached inside that report; screenshotUrl isn't sent.
+const { execSync } = require("child_process");
 const { SITE_URL } = require("./publishAllureReport");
 
-async function sendReportEmail(results, { env, reportUrl }) {
-  const apiKey = process.env.CRS_API_KEY;
-  const recipients = (process.env.CRS_REPORT_RECIPIENTS || "")
+// CI checks out a detached HEAD, so prefer the branch name GitHub Actions
+// provides; locally, ask git.
+function currentBranch() {
+  if (process.env.REPORT_BRANCH) return process.env.REPORT_BRANCH; // set by Jenkinsfile
+  if (process.env.GITHUB_HEAD_REF) return process.env.GITHUB_HEAD_REF; // PR source branch
+  if (process.env.GITHUB_REF_NAME) return process.env.GITHUB_REF_NAME;
+  try {
+    return execSync("git rev-parse --abbrev-ref HEAD", { stdio: ["ignore", "pipe", "ignore"] })
+      .toString()
+      .trim();
+  } catch {
+    return "";
+  }
+}
+
+function recipientsFor(branch) {
+  const key = `CRS_REPORT_RECIPIENTS_${branch.toUpperCase().replace(/[^A-Z0-9]/g, "_")}`;
+  const list = (branch && process.env[key]) || process.env.CRS_REPORT_RECIPIENTS || "";
+  return list
     .split(",")
     .map((email) => email.trim())
     .filter(Boolean);
+}
+
+async function sendReportEmail(results, { env, reportUrl }) {
+  const apiKey = process.env.CRS_API_KEY;
+  const branch = currentBranch();
+  const recipients = recipientsFor(branch);
 
   if (!apiKey || recipients.length === 0) {
     console.log(
-      "[send-report-email] CRS_API_KEY or CRS_REPORT_RECIPIENTS not set in .env — skipping report email."
+      `[send-report-email] CRS_API_KEY or recipients for branch "${branch}" not set in .env — skipping report email.`
     );
     return;
   }
@@ -51,7 +78,7 @@ async function sendReportEmail(results, { env, reportUrl }) {
   const failedCount = results?.totalFailed ?? 0;
   const passedCount = results?.totalPassed ?? 0;
   const skippedCount = results?.totalSkipped ?? 0;
-  const description = `${totalTestCases} test case(s) executed on ${environment} — ${passedCount} passed, ${failedCount} failed, ${skippedCount} skipped`;
+  const description = `${totalTestCases} test case(s) executed on ${environment}${branch ? ` (branch: ${branch})` : ""} — ${passedCount} passed, ${failedCount} failed, ${skippedCount} skipped`;
 
   const form = new FormData();
   recipients.forEach((email) => form.append("email[]", email));
@@ -80,7 +107,7 @@ async function sendReportEmail(results, { env, reportUrl }) {
   form.append("data[failedCount]", String(failedCount));
   form.append("data[totalTestCases]", String(totalTestCases));
   form.append("data[senderName]", "Mujjamil");
-  form.append("subject", `Automation Execution Report - VMS - ${subjectDate}`);
+  form.append("subject", `Automation Execution Report - VMS${branch ? ` [${branch}]` : ""} - ${subjectDate}`);
 
   try {
     const response = await fetch("https://crs.farmjunction.in/api/send/email", {
@@ -99,7 +126,7 @@ async function sendReportEmail(results, { env, reportUrl }) {
       return;
     }
 
-    console.log(`[send-report-email] Report email sent to: ${recipients.join(", ")}`);
+    console.log(`[send-report-email] Report email (branch: ${branch}) sent to: ${recipients.join(", ")}`);
   } catch (err) {
     console.error("[send-report-email] Error sending report email:", err.message);
   }

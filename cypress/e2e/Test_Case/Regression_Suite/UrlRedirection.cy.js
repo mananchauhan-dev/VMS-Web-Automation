@@ -148,6 +148,8 @@ const PROTECTED_STATIC_ROUTES = [
   "/vms-admin/learning-module/watch-videos",
 ];
 
+import * as allure from "allure-js-commons";
+
 describe("URL Redirection", () => {
   // This spec only checks routing (no bounce to /login). Some pages fire API
   // calls that fail without an id/context and the app doesn't catch them
@@ -172,12 +174,119 @@ describe("URL Redirection", () => {
   it("Positive: every static protected route loads without redirecting to login", () => {
     cy.loginViaApi();
 
+    // Timing + status for every page and every API call it makes — reported
+    // to Allure at the end (slow/error ones highlighted). Informational only:
+    // slowness never fails this test, only a /login bounce does.
+    const timings = [];
+    let currentRoute = null;
+
+    cy.intercept("**/api/**", (req) => {
+      const route = currentRoute;
+      const startedAt = Date.now();
+      req.continue((res) => {
+        timings.push({
+          route,
+          type: "API",
+          url: `${req.method} ${req.url.replace(/^https?:\/\/[^/]+/, "")}`,
+          status: res.statusCode,
+          ms: Date.now() - startedAt,
+        });
+      });
+    });
+
     PROTECTED_STATIC_ROUTES.forEach((route) => {
+      cy.then(() => {
+        currentRoute = route;
+      });
       cy.visit(route, { failOnStatusCode: false });
       cy.location("pathname", { timeout: 15000 }).should("not.include", "/login");
+
+      // Page load = navigation start → load event, from the browser's own
+      // Navigation Timing entry (includes the document's HTTP status).
+      cy.window().then((win) => {
+        const nav = win.performance.getEntriesByType("navigation")[0];
+        timings.push({
+          route,
+          type: "Page",
+          url: route,
+          status: nav && nav.responseStatus ? nav.responseStatus : "-",
+          ms: nav ? Math.round(nav.duration) : "-",
+        });
+      });
+      // Let the page's own data requests finish so they're attributed to it.
+      cy.wait(SETTLE_MS);
     });
+
+    cy.then(() => reportTimings(timings));
   });
 });
+
+// --- Timing report (Allure) ---------------------------------------------------
+
+const SLOW_MS = 300;
+const SETTLE_MS = 500;
+
+function isSlow(t) {
+  return typeof t.ms === "number" && t.ms > SLOW_MS;
+}
+
+function isErrorStatus(t) {
+  return typeof t.status === "number" && t.status >= 400;
+}
+
+// One Allure step per URL (slow or error → "broken", shown yellow; the test
+// itself still passes) plus an HTML table attachment, slowest first.
+function reportTimings(timings) {
+  const flagged = timings.filter((t) => isSlow(t) || isErrorStatus(t));
+
+  cy.log(`${flagged.length} of ${timings.length} URLs over ${SLOW_MS} ms or error status`);
+
+  [...timings]
+    .sort((a, b) => (Number(b.ms) || 0) - (Number(a.ms) || 0))
+    .forEach((t) => {
+      const bad = isSlow(t) || isErrorStatus(t);
+      const icon = bad ? "⚠️" : "✅";
+      allure.logStep(
+        `${icon} [${t.type}] ${t.url} — ${t.ms} ms — status ${t.status}` +
+          (t.type === "API" ? `  (on ${t.route})` : ""),
+        bad ? "broken" : "passed"
+      );
+    });
+
+  allure.attachment(
+    `URL timings (>${SLOW_MS} ms or 4xx/5xx highlighted)`,
+    timingsTableHtml(timings),
+    "text/html"
+  );
+}
+
+function timingsTableHtml(timings) {
+  const escape = (s) =>
+    String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+
+  const rows = [...timings]
+    .sort((a, b) => (Number(b.ms) || 0) - (Number(a.ms) || 0))
+    .map((t) => {
+      const bg = isErrorStatus(t) ? "#fde2e1" : isSlow(t) ? "#fff4cc" : "";
+      const msStyle = isSlow(t) ? "color:#c62828;font-weight:bold" : "";
+      const stStyle = isErrorStatus(t) ? "color:#c62828;font-weight:bold" : "";
+      return `<tr style="background:${bg}">
+        <td>${escape(t.type)}</td><td>${escape(t.url)}</td><td>${escape(t.route)}</td>
+        <td style="${stStyle}">${escape(t.status)}</td><td style="${msStyle}">${escape(t.ms)}</td></tr>`;
+    })
+    .join("");
+
+  const slow = timings.filter(isSlow).length;
+  const errors = timings.filter(isErrorStatus).length;
+
+  return `<html><body style="font-family:sans-serif;font-size:13px">
+    <p><b>${timings.length}</b> URLs · <b style="color:#b26a00">${slow}</b> over ${SLOW_MS} ms (yellow) ·
+       <b style="color:#c62828">${errors}</b> with 4xx/5xx status (red)</p>
+    <table border="1" cellpadding="4" style="border-collapse:collapse">
+      <tr style="background:#eee"><th>Type</th><th>URL</th><th>Page</th><th>Status</th><th>Time (ms)</th></tr>
+      ${rows}
+    </table></body></html>`;
+}
 
 // --- Not covered above ------------------------------------------------------
 //

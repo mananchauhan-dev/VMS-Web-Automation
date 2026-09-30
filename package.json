@@ -12,7 +12,7 @@
     "test:uat": "cross-env ENV=uat cypress run",
     "test:staging": "cross-env ENV=staging cypress run",
     "test:prod": "cross-env ENV=prod cypress run",
-    "test:regression": "cross-env ENV=dev cypress run --spec \"cypress/e2e/Test_Case/Regression_Suite/**/*.cy.js\"",
+    "test:regression": "cross-env ENV=dev cypress run --spec \"cypress/e2e/Test_Case/Regression_Suite test/**/*.cy.js\"",
     "report:clean": "rm -rf allure-results allure-report",
     "report:allure": "allure generate ./allure-results",
     "report:open": "allure open ./allure-report/allure2",
